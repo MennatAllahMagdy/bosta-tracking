@@ -1,0 +1,36 @@
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-between;
+  
+    margin-right:110px;
+}
+
+.trackDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+.unhoveredText {
+    color: #4f5665;;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    letter-spacing: 0;
+}
+.hoveredText{
+    color: #e30613;font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    letter-spacing: 0;}
+.menu {
+    margin: 10px;
+    
+}
+.menu>p {
+    font-size: 16px;
+    line-height: 24px;
+}
