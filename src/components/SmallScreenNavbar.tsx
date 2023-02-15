@@ -29,9 +29,15 @@ const SmallScreenNavbar = () => {
           >
             <p>Track Shipment</p>
             {isHovered ? (
-              <RiArrowDropRightLine size={30} style={{ color: "#e30613" }} />
+              <RiArrowDropRightLine
+                size={25}
+                style={{ marginBottom: "2px", color: "#e30613" }}
+              />
             ) : (
-              <RiArrowDropDownLine size={30} style={{ color: "#e30613" }} />
+              <RiArrowDropDownLine
+                size={25}
+                style={{ marginBottom: "2px", color: "#e30613" }}
+              />
             )}
           </div>
         }
@@ -66,7 +72,12 @@ const SmallScreenNavbar = () => {
         </div>
       </Popup>
       <div>
-        <FiMenu size={30} style={{ paddingLeft: "20px" }} />
+        <FiMenu
+          size={30}
+          style={{
+            margin: "10px",
+          }}
+        />
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ const Search = () => {
     navigate(`/tracking-shipments/?shipment-number=${trackingNum}`);
   };
   return (
-    <div className={styles.main}>
+    <div className={styles.searchDiv}>
       <h4>Track your shipment</h4>
       <div className={styles.inputSearch}>
         <input
