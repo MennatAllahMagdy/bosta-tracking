@@ -11,9 +11,11 @@ const TrackingShipments = () => {
     <div className={styles.main}>
       <Header />
       <Search />
-      <Routes>
-        <Route path="/tracking-shipments" element={<SearchResult />} />
-      </Routes>
+      <div className={styles.routeDiv}>
+        <Routes>
+          <Route path="/tracking-shipments" element={<SearchResult />} />
+        </Routes>
+      </div>
     </div>
   );
 };
