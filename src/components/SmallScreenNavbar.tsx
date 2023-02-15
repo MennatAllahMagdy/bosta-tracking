@@ -5,9 +5,17 @@ import { FiMenu } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
 import Popup from "reactjs-popup";
 import styles from "./SmallScreenNavbar.module.css";
+import { useNavigate } from "react-router-dom";
 
 const SmallScreenNavbar = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [trackingNum, setTrackingNum] = useState(String);
+  const navigate = useNavigate();
+
+  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTrackingNum(e.target.value);
+  };
+
   const hoverHandler = () => {
     setIsHovered(true);
   };
@@ -16,6 +24,9 @@ const SmallScreenNavbar = () => {
   };
   const changeStyles = () => {
     console.log("done");
+  };
+  const searchHandler = () => {
+    navigate(`/tracking-shipments/?shipment-number=${trackingNum}`);
   };
   return (
     <div className={styles.nav}>
@@ -64,8 +75,10 @@ const SmallScreenNavbar = () => {
               placeholder="Tracking No."
               style={{ border: "1px solid #e4e7ec" }}
               className={styles.inputBar}
+              value={trackingNum}
+              onChange={inputHandler}
             />
-            <div className={styles.searchIcon}>
+            <div className={styles.searchIcon} onClick={searchHandler}>
               <FiSearch color="white" />
             </div>
           </div>
