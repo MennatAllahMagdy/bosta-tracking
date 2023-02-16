@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 
 import { FiSearch } from "react-icons/fi";
+import { TFunction } from "i18next";
 import styles from "./Search.module.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Search = () => {
-  const navigate = useNavigate();
   const [trackingNum, setTrackingNum] = useState(String);
+  const { t }: { t: TFunction } = useTranslation();
+  const navigate = useNavigate();
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTrackingNum(e.target.value);
   };
-  console.log(trackingNum);
 
   const searchClick = () => {
     navigate(`/tracking-shipments/?shipment-number=${trackingNum}`);
   };
   return (
     <div className={styles.searchDiv}>
-      <h4>Track your shipment</h4>
+      <h4>{t("track_your_Shipment")}</h4>
       <div className={styles.inputSearch}>
         <input
           value={trackingNum}
           onChange={inputHandler}
-          placeholder="Tracking No."
+          placeholder={`${t("track_no")}`}
           className={styles.inputBar}
         />
         <div className={styles.searchIcon} onClick={searchClick}>

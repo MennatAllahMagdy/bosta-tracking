@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import { BiError } from "react-icons/bi";
+import { TFunction } from "i18next";
 import styles from "./SearchResult.module.css";
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useWidthHook } from "../hooks/useWidthHook";
 import { v4 as uuidv4 } from "uuid";
 
@@ -18,6 +20,7 @@ const SearchResult = () => {
   const [searchParams] = useSearchParams();
   const shipmentNum = searchParams.get("shipment-number");
   const width = useWidthHook();
+  const { t }: { t: TFunction } = useTranslation();
 
   //575
   useEffect(() => {
@@ -91,16 +94,26 @@ const SearchResult = () => {
     "Dec",
   ];
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
-  console.log(result);
+
   return (
     <div>
       {result ? (
         <div className={styles.resultDiv}>
           <div className={styles.shipmentDetails}>
             <div className={styles.shipmentStatus}>
-              <p className={styles.shipmentNum}>Shipment No. {shipmentNum}</p>
+              <p className={styles.shipmentNum}>
+                {t("shipment_no")}
+                {shipmentNum}
+              </p>
 
-              <p className={styles.shipmentStatusText}>{status}</p>
+              <p className={styles.shipmentStatusText}>
+                {status === "Delivered"
+                  ? t("delivered")
+                  : status === "Returned"
+                  ? t("returned")
+                  : status === "Preparing for shipment" &&
+                    t("preparing-shipment")}
+              </p>
             </div>
             <div className={styles.lines}>
               <hr className={styles.darkHr}></hr>
@@ -119,27 +132,26 @@ const SearchResult = () => {
             </div>
             <div>
               <div className={styles.orderStatus}>
-                Order is delivered
+                {status === "Delivered"
+                  ? t("order_delivered")
+                  : status === "Returned"
+                  ? t("order_returned_shipper")
+                  : status === "Preparing for shipment" && t("shipper_pickup")}
                 <span>
-                  {new Date(
-                    result["CurrentStatus"]["timestamp"]
-                  ).toLocaleDateString("en-US", {
-                    weekday: "short",
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
+                  {t("date", {
+                    itemDate: new Date(result["CurrentStatus"]["timestamp"]),
                   })}
                 </span>
               </div>
               <div className={styles.lastUpdate}>
-                <p>(Last update since {diffTime} day ago.)</p>
+                <p>{t("last_update", { diffTime })}</p>
               </div>
             </div>
             <div className={styles.seperator}></div>
           </div>
 
           <div className={styles.activityLog}>
-            <p>Activity Log</p>
+            <p>{t("activity_log")}</p>
             <div className={styles.activityDiv}>
               <ul>
                 {uniqueDates.map((item) => (
@@ -148,8 +160,10 @@ const SearchResult = () => {
                     <div className={styles.secondDiv}></div>
                     <div className={styles.content}>
                       <div>
-                        {dayNames[item.getDay()]}, {item.getDate()}{" "}
-                        {monthNames[item.getMonth()]}
+                        {t("date", { itemDate: item }).substring(
+                          0,
+                          t("date", { itemDate: item }).length - 4
+                        )}
                       </div>
                       {eventsList.map(
                         (eachEvent) =>
@@ -173,14 +187,12 @@ const SearchResult = () => {
         </div>
       ) : (
         <div className={styles.notFound}>
-          <p className={styles.shipmentNum}>Shipment No. {shipmentNum}</p>
+          <p className={styles.shipmentNum}>
+            {t("shipment_no")} {shipmentNum}
+          </p>
           <div className={styles.notFoundBox}>
             <BiError size={30} color={"red"} />
-            <p>
-              No record of this tracking number can be found at this time,
-              please check the number and try again later. For further
-              assistance, please contact Customer Service.
-            </p>
+            <p>{t("not_found")}</p>
           </div>
         </div>
       )}

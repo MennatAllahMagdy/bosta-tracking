@@ -4,14 +4,16 @@ import { RiArrowDropDownLine, RiArrowDropRightLine } from "react-icons/ri";
 import { FiMenu } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
 import Popup from "reactjs-popup";
+import { TFunction } from "i18next";
 import styles from "./SmallScreenNavbar.module.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SmallScreenNavbar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [trackingNum, setTrackingNum] = useState(String);
   const navigate = useNavigate();
-
+  const { t }: { t: TFunction } = useTranslation();
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTrackingNum(e.target.value);
   };
@@ -38,7 +40,7 @@ const SmallScreenNavbar = () => {
             onMouseEnter={hoverHandler}
             onMouseLeave={hoverOutHandler}
           >
-            <p>Track Shipment</p>
+            <p>{t("track_Shipment")}</p>
             {isHovered ? (
               <RiArrowDropRightLine
                 size={25}
@@ -69,10 +71,10 @@ const SmallScreenNavbar = () => {
         arrow={false}
       >
         <div className={styles.menu}>
-          <p>Track your shipment</p>
+          <p>{t("track_your_Shipment")}</p>
           <div className={styles.inputSearch}>
             <input
-              placeholder="Tracking No."
+              placeholder={`${t("track_no")}`}
               style={{ border: "1px solid #e4e7ec" }}
               className={styles.inputBar}
               value={trackingNum}

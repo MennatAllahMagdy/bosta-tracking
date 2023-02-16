@@ -1,17 +1,39 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RiArrowDropDownLine, RiArrowDropRightLine } from "react-icons/ri";
 
+import { LangContext } from "../store/lang-Context";
 import Popup from "reactjs-popup";
+import i18n from "../locales/i18n";
 import styles from "./Navbar.module.css";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const { t } = useTranslation();
+  const ctx = useContext(LangContext);
+  const number_hours = 125;
+
+  const handleOnclick = (lang: string) => {
+    console.log(lang);
+    if (lang === "en") {
+      ctx.setLang("en");
+      i18n.changeLanguage("en");
+    } else if (lang === "ar") {
+      ctx.setLang("ar");
+      i18n.changeLanguage("arab");
+    }
+  };
   const hoverHandler = () => {
     setIsHovered(true);
   };
   const hoverOutHandler = () => {
     setIsHovered(false);
   };
+  //  <p>{t("diff", { number_hours })}</p>
+  useEffect(() => {
+    if (ctx.lang == "en") document.body.dir = "ltr";
+    else if (ctx.lang == "ar") document.body.dir = "rtl";
+  }, [ctx.lang]);
   return (
     <div className={styles.nav}>
       <Popup
@@ -24,7 +46,7 @@ const Navbar = () => {
             <p
               className={isHovered ? styles.hoveredText : styles.unhoveredText}
             >
-              En
+              {t("en")}
             </p>
             {isHovered ? (
               <RiArrowDropRightLine size={30} style={{ color: "#e30613" }} />
@@ -52,8 +74,8 @@ const Navbar = () => {
         arrow={false}
       >
         <div className={styles.menu}>
-          <p>English</p>
-          <p>Arabic</p>
+          <p onClick={() => handleOnclick("en")}>{t("english")}</p>
+          <p onClick={() => handleOnclick("ar")}>{t("arabic")}</p>
         </div>
       </Popup>
     </div>
