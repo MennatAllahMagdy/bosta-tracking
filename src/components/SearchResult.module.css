@@ -213,8 +213,10 @@
     color: rgb(17,22,25);
     border-radius: 8px;
     border: 1px solid #e4e7ec;
-    padding-inline-start: 2px;
+    padding-inline-start: 12px;
+    padding:10px;
     margin-block-end: 16px;
+    margin-block-start: 8px;
     word-wrap: break-word;
 }
 .contentDetails>span:nth-child(2){

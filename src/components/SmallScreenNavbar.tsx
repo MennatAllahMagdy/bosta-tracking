@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { RiArrowDropDownLine, RiArrowDropRightLine } from "react-icons/ri";
 
 import { FiMenu } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
+import { LangContext } from "../store/lang-Context";
 import Popup from "reactjs-popup";
 import { TFunction } from "i18next";
 import styles from "./SmallScreenNavbar.module.css";
@@ -12,6 +13,7 @@ import { useTranslation } from "react-i18next";
 const SmallScreenNavbar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [trackingNum, setTrackingNum] = useState(String);
+  const ctx = useContext(LangContext);
   const navigate = useNavigate();
   const { t }: { t: TFunction } = useTranslation();
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +56,7 @@ const SmallScreenNavbar = () => {
             )}
           </div>
         }
-        position="bottom right"
+        position={ctx.lang === "en" ? "bottom right" : "bottom left"}
         on="click"
         closeOnDocumentClick
         mouseLeaveDelay={300}
@@ -76,11 +78,20 @@ const SmallScreenNavbar = () => {
             <input
               placeholder={`${t("track_no")}`}
               style={{ border: "1px solid #e4e7ec" }}
-              className={styles.inputBar}
+              className={
+                ctx.lang === "ar" ? styles.rightInputBar : styles.leftInputBar
+              }
               value={trackingNum}
               onChange={inputHandler}
             />
-            <div className={styles.searchIcon} onClick={searchHandler}>
+            <div
+              className={
+                ctx.lang === "ar"
+                  ? styles.rightSearchIcon
+                  : styles.leftSearchIcon
+              }
+              onClick={searchHandler}
+            >
               <FiSearch color="white" />
             </div>
           </div>
