@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { LangContext } from "../store/lang-Context";
 import NotFoundOrder from "./NotFoundOrder";
 import { TFunction } from "i18next";
-import i18n from "../locales/i18n";
 import styles from "./SearchResult.module.css";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -53,7 +52,7 @@ const SearchResult = () => {
   const getUniqueDates = () => {
     let uniqueDates = eventsList
       .map((item) => new Date(item["timestamp"]).toDateString())
-      .filter((d, i, a) => a.indexOf(d) == i)
+      .filter((d, i, a) => a.indexOf(d) === i)
       .map((d) => new Date(d));
     return uniqueDates;
   };
@@ -78,7 +77,7 @@ const SearchResult = () => {
           <div
             className={styles.shipmentDetails}
             style={
-              ctx.lang == "en"
+              ctx.lang === "en"
                 ? { fontFamily: "Lato" }
                 : { fontFamily: "Cairo" }
             }
@@ -115,7 +114,7 @@ const SearchResult = () => {
             </div>
             <div
               style={
-                ctx.lang == "en"
+                ctx.lang === "en"
                   ? { fontFamily: "Lato" }
                   : { fontFamily: "Cairo" }
               }
@@ -144,7 +143,7 @@ const SearchResult = () => {
             <div
               className={styles.activityDiv}
               style={
-                ctx.lang == "en"
+                ctx.lang === "en"
                   ? { fontFamily: "Lato" }
                   : { fontFamily: "Cairo" }
               }
@@ -169,7 +168,7 @@ const SearchResult = () => {
                               key={uuidv4()}
                               className={styles.contentDetails}
                               style={
-                                ctx.lang == "en"
+                                ctx.lang === "en"
                                   ? { fontFamily: "Lato" }
                                   : { fontFamily: "Cairo" }
                               }

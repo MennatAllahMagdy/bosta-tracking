@@ -11,9 +11,12 @@ i18n
     fallbackLng:"en",
     interpolation: {
       format: (value, format, lng) => {
-        if(lng=="arab")
-        {lng="ar-eg"}
-        else lng="eg"
+        if(lng === "arab")
+        {
+          lng="ar-eg"
+        }
+        else 
+          lng="eg"
 
         if (format === "date") {
           return new Intl.DateTimeFormat(lng,{

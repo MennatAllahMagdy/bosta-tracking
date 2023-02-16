@@ -35,8 +35,8 @@ const SmallScreenNavbar = () => {
   };
 
   useEffect(() => {
-    if (ctx.lang == "en") document.body.dir = "ltr";
-    else if (ctx.lang == "ar") document.body.dir = "rtl";
+    if (ctx.lang === "en") document.body.dir = "ltr";
+    else if (ctx.lang === "ar") document.body.dir = "rtl";
   }, [ctx.lang]);
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

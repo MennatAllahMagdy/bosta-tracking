@@ -29,8 +29,8 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (ctx.lang == "en") document.body.dir = "ltr";
-    else if (ctx.lang == "ar") document.body.dir = "rtl";
+    if (ctx.lang === "en") document.body.dir = "ltr";
+    else if (ctx.lang === "ar") document.body.dir = "rtl";
   }, [ctx.lang]);
   return (
     <div className={styles.nav}>
