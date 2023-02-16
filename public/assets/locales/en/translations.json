@@ -22,5 +22,18 @@
    "Order_canceled_returned":"Order is canceled and it will be returned back to the shipper",
    "preparing-shipment":"Preparing for shipment",
    "shipper_pickup":"Your shipper requested a pickup. Bosta will pick it up soon",
-   "not_found":"No record of this tracking number can be found at this time,please check the number and try again later. For further assistance, please contact Customer Service."
+   "not_found":"No record of this tracking number can be found at this time,please check the number and try again later. For further assistance, please contact Customer Service.",
+   
+   "TICKET_CREATED":"Your order is created, Bosta will pick it up once your shipper is ready",
+   "PACKAGE_RECEIVED":"Order is received at Bosta warehouses and being processed. ",
+   "IN_TRANSIT":"Order is being transferred to Bosta's Hubs",
+   "AVAILABLE_FOR_PICKUP":"Order is out for pickup",
+   "NOT_YET_SHIPPED":"Not yet shipped",
+   "DELIVERED_TO_SENDER":"Order is returned back to the shipper",
+   "DELIVERED":"Order is delivered",
+   "OUT_FOR_DELIVERY":"Order is delivered",
+   "CANCELLED":"Order has been deleted. Please contact the shipper for more info",
+   "WAITING_FOR_CUSTOMER_ACTION":"Order is rescheduled as you were not reachable on the phone",
+   "RECEIVED_DELIVERY_LOCATION":"Order location is received"
+
 }

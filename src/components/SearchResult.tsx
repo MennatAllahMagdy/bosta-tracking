@@ -12,6 +12,7 @@ interface Event {
   timestamp: Date;
   reason: string;
   state: string;
+  hub: string;
 }
 const SearchResult = () => {
   const [result, setResult] = useState<any>(null);
@@ -173,7 +174,10 @@ const SearchResult = () => {
                               key={uuidv4()}
                               className={styles.contentDetails}
                             >
-                              <span>{eachEvent["state"]}</span>
+                              <span>{t(eachEvent["state"])}</span>
+                              <span>
+                                {eachEvent["hub"] && eachEvent["hub"]}
+                              </span>
                               <span>{getTime(eachEvent["timestamp"])}</span>
                             </div>
                           )
