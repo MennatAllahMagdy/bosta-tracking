@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import { BiError } from "react-icons/bi";
+import { LangContext } from "../store/lang-Context";
+import NotFoundOrder from "./NotFoundOrder";
 import { TFunction } from "i18next";
+import i18n from "../locales/i18n";
 import styles from "./SearchResult.module.css";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useWidthHook } from "../hooks/useWidthHook";
 import { v4 as uuidv4 } from "uuid";
 
 interface Event {
@@ -20,9 +21,8 @@ const SearchResult = () => {
   const [status, setStatus] = useState<String>("");
   const [searchParams] = useSearchParams();
   const shipmentNum = searchParams.get("shipment-number");
-  const width = useWidthHook();
   const { t }: { t: TFunction } = useTranslation();
-
+  const ctx = useContext(LangContext);
   useEffect(() => {
     fetch(`https://tracking.bosta.co/shipments/track/${shipmentNum}`, {
       method: "GET",
@@ -59,15 +59,6 @@ const SearchResult = () => {
   };
   const uniqueDates = getUniqueDates();
 
-  const getTime = (time: any) => {
-    const newTime = new Date(time).toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-    return newTime;
-  };
-
   const differnceBetwwenDates = () => {
     if (result != null) {
       const dated = new Date(result["CurrentStatus"]["timestamp"]).valueOf();
@@ -81,10 +72,17 @@ const SearchResult = () => {
   const diffTime = differnceBetwwenDates();
 
   return (
-    <div>
+    <div className={ctx.lang === "en" ? styles.en : styles.arab}>
       {result ? (
         <div className={styles.resultDiv}>
-          <div className={styles.shipmentDetails}>
+          <div
+            className={styles.shipmentDetails}
+            style={
+              ctx.lang == "en"
+                ? { fontFamily: "Lato" }
+                : { fontFamily: "Cairo" }
+            }
+          >
             <div className={styles.shipmentStatus}>
               <p className={styles.shipmentNum}>
                 {t("shipment_no")}
@@ -115,7 +113,13 @@ const SearchResult = () => {
                 }
               ></hr>
             </div>
-            <div>
+            <div
+              style={
+                ctx.lang == "en"
+                  ? { fontFamily: "Lato" }
+                  : { fontFamily: "Cairo" }
+              }
+            >
               <div className={styles.orderStatus}>
                 {status === "Delivered"
                   ? t("order_delivered")
@@ -137,7 +141,14 @@ const SearchResult = () => {
 
           <div className={styles.activityLog}>
             <p>{t("activity_log")}</p>
-            <div className={styles.activityDiv}>
+            <div
+              className={styles.activityDiv}
+              style={
+                ctx.lang == "en"
+                  ? { fontFamily: "Lato" }
+                  : { fontFamily: "Cairo" }
+              }
+            >
               <ul>
                 {uniqueDates.map((item) => (
                   <li key={uuidv4()} className={styles.listEvents}>
@@ -157,6 +168,11 @@ const SearchResult = () => {
                             <div
                               key={uuidv4()}
                               className={styles.contentDetails}
+                              style={
+                                ctx.lang == "en"
+                                  ? { fontFamily: "Lato" }
+                                  : { fontFamily: "Cairo" }
+                              }
                             >
                               <span>{t(eachEvent["state"])}</span>
                               <span>
@@ -178,15 +194,7 @@ const SearchResult = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.notFound}>
-          <p className={styles.shipmentNum}>
-            {t("shipment_no")} {shipmentNum}
-          </p>
-          <div className={styles.notFoundBox}>
-            <BiError size={30} color={"red"} />
-            <p>{t("not_found")}</p>
-          </div>
-        </div>
+        <NotFoundOrder shipmentNum={shipmentNum} />
       )}
     </div>
   );

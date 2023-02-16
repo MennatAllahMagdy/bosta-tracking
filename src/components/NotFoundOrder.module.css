@@ -1,0 +1,40 @@
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+
+}
+.notFoundBox {
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    padding: 16px;
+    background: #fef3f2;
+    border: 1px solid #fecdca;
+    border-radius: 4px;
+    max-width: 650px;
+    font-family:'Lato';
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+    gap:15px
+}
+.notFoundBox>p{
+    font-family: 'Cairo';
+    font-weight: 400;
+    letter-spacing: normal;
+}
+
+.shipmentNum {
+    font-family: 'Lato', sans-serif;
+    font-weight:300;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: 0;
+    color:#667085;
+    text-align: center;
+    margin-block-end: 0px;
+   
+}
