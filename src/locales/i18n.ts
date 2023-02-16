@@ -14,6 +14,7 @@ i18n
         if(lng=="arab")
         {lng="ar-eg"}
         else lng="eg"
+
         if (format === "date") {
           return new Intl.DateTimeFormat(lng,{
             weekday: "short",
@@ -22,6 +23,14 @@ i18n
             year: "numeric",
           }).format(value);
         }
+
+        if (format === "time")
+        return new Intl.DateTimeFormat(lng,{
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        }).format(value);
+
         if (format === "number") {
         
           return new Intl.NumberFormat(lng).format(value);

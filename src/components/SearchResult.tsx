@@ -80,21 +80,6 @@ const SearchResult = () => {
     }
   };
   const diffTime = differnceBetwwenDates();
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
 
   return (
     <div>
@@ -178,7 +163,11 @@ const SearchResult = () => {
                               <span>
                                 {eachEvent["hub"] && eachEvent["hub"]}
                               </span>
-                              <span>{getTime(eachEvent["timestamp"])}</span>
+                              <span>
+                                {t("time", {
+                                  itemTime: new Date(eachEvent["timestamp"]),
+                                })}
+                              </span>
                             </div>
                           )
                       )}

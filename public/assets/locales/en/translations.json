@@ -3,6 +3,7 @@
    "arabic":"Arabic",
    "en":"En",
    "date":"{{itemDate,date}}",
+   "time":"{{itemTime, time}}",
    "last_update":"Last update since {{diffTime,number}} day ago.",
    "track_Shipment":"Track Shipment",
    "track_your_Shipment":"Track your Shipment",
