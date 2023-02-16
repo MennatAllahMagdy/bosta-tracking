@@ -23,7 +23,6 @@ const SearchResult = () => {
   const width = useWidthHook();
   const { t }: { t: TFunction } = useTranslation();
 
-  //575
   useEffect(() => {
     fetch(`https://tracking.bosta.co/shipments/track/${shipmentNum}`, {
       method: "GET",

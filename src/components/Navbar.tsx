@@ -11,10 +11,8 @@ const Navbar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { t } = useTranslation();
   const ctx = useContext(LangContext);
-  const number_hours = 125;
 
   const handleOnclick = (lang: string) => {
-    console.log(lang);
     if (lang === "en") {
       ctx.setLang("en");
       i18n.changeLanguage("en");
@@ -29,7 +27,7 @@ const Navbar = () => {
   const hoverOutHandler = () => {
     setIsHovered(false);
   };
-  //  <p>{t("diff", { number_hours })}</p>
+
   useEffect(() => {
     if (ctx.lang == "en") document.body.dir = "ltr";
     else if (ctx.lang == "ar") document.body.dir = "rtl";
