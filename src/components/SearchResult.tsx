@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
+import { Circles } from "react-loader-spinner";
 import { LangContext } from "../store/lang-Context";
 import NotFoundOrder from "./NotFoundOrder";
 import { TFunction } from "i18next";
@@ -15,6 +16,7 @@ interface Event {
   hub: string;
 }
 const SearchResult = () => {
+  const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [eventsList, setEventsList] = useState<Array<Event>>([]);
   const [status, setStatus] = useState<String>("");
@@ -23,6 +25,7 @@ const SearchResult = () => {
   const { t }: { t: TFunction } = useTranslation();
   const ctx = useContext(LangContext);
   useEffect(() => {
+    setLoading(true);
     fetch(`https://tracking.bosta.co/shipments/track/${shipmentNum}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -33,6 +36,7 @@ const SearchResult = () => {
         } else {
           return response.json();
         }
+        setLoading(false);
       })
       .then((data) => {
         setResult(data);
@@ -43,6 +47,7 @@ const SearchResult = () => {
           setStatus("Returned");
         else if (data["CurrentStatus"]["state"] === "TICKET_CREATED")
           setStatus("Preparing for shipment");
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -69,10 +74,22 @@ const SearchResult = () => {
     }
   };
   const diffTime = differnceBetwwenDates();
-
+  if (loading) {
+    return (
+      <div className={styles.loading}>
+        <Circles
+          ariaLabel="circles-loading"
+          color="#0098a5"
+          height="50"
+          width="50"
+          visible={true}
+        />
+      </div>
+    );
+  }
   return (
     <div className={ctx.lang === "en" ? styles.en : styles.arab}>
-      {result ? (
+      {result && !loading ? (
         <div className={styles.resultDiv}>
           <div
             className={styles.shipmentDetails}
@@ -193,7 +210,7 @@ const SearchResult = () => {
           </div>
         </div>
       ) : (
-        <NotFoundOrder shipmentNum={shipmentNum} />
+        !result && <NotFoundOrder shipmentNum={shipmentNum} />
       )}
     </div>
   );
