@@ -18,6 +18,7 @@
    "Order_transferred":"Order is being transferred to Bosta's Hubs.",
    "Your order_created":"Your order is created, Bosta will pick it up once your shipper is ready",
    "returned":"Returned",
+   "cancelled":"Deleted",
    "order_returned_shipper":"Order is returned back to the shipper",
    "order_being_returned_shipper":"Order is being returned to the shipper",
    "Order_canceled_returned":"Order is canceled and it will be returned back to the shipper",

@@ -47,6 +47,9 @@ const SearchResult = () => {
           setStatus("Returned");
         else if (data["CurrentStatus"]["state"] === "TICKET_CREATED")
           setStatus("Preparing for shipment");
+        else if (data["CurrentStatus"]["state"] === "CANCELLED")
+          setStatus("Cancelled");
+
         setLoading(false);
       })
       .catch((error) => {
@@ -110,8 +113,9 @@ const SearchResult = () => {
                   ? t("delivered")
                   : status === "Returned"
                   ? t("returned")
-                  : status === "Preparing for shipment" &&
-                    t("preparing-shipment")}
+                  : status === "Preparing for shipment"
+                  ? t("preparing-shipment")
+                  : status === "Cancelled" && t("cancelled")}
               </p>
             </div>
             <div className={styles.lines}>
